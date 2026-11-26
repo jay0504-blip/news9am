@@ -92,12 +92,12 @@ def gemini_models(key):
         v = re.search(r"(\d+(?:\.\d+)?)", n)
         return (float(v.group(1)) if v else 0, "lite" not in n, "preview" not in n and "exp" not in n, -len(n))
     found.sort(key=rank, reverse=True)
-    _models = found[:4] + [m for m in GEMINI_MODELS if m not in found]
+    _models = found[:6] + [m for m in GEMINI_MODELS if m not in found]
     log("  사용할 Gemini 모델 순서:", _models[:4])
     return _models
 
 
-def gemini(parts, schema=None, temp=0.4):
+def gemini(parts, schema=None, temp=0.4, timeout=150, prefer_lite=False, max_models=4, attempts=3):
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise RuntimeError("GEMINI_API_KEY 없음")
@@ -106,11 +106,14 @@ def gemini(parts, schema=None, temp=0.4):
         cfg["responseSchema"] = schema
     body = json.dumps({"contents": [{"role": "user", "parts": parts}], "generationConfig": cfg}).encode()
     last = None
-    for model in gemini_models(key):
-        for attempt in range(3):
+    models = gemini_models(key)
+    if prefer_lite:
+        models = [m for m in models if "lite" in m] + [m for m in models if "lite" not in m]
+    for model in models[:max_models]:
+        for attempt in range(attempts):
             try:
                 r = json.loads(http(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
-                                    data=body, headers={"Content-Type": "application/json"}, timeout=180))
+                                    data=body, headers={"Content-Type": "application/json"}, timeout=timeout))
                 txt = r["candidates"][0]["content"]["parts"][0]["text"]
                 return json.loads(txt)
             except urllib.error.HTTPError as e:
@@ -163,7 +166,7 @@ def write_script(news, today):
 - 날씨 기사가 있으면 weather에 한 문장(해요체)으로, 없으면 빈 문자열.
 - source_ids: 그 뉴스의 근거가 된 묶음 번호들.
 JSON으로만 답해."""
-    data = gemini([{"text": prompt}], SCRIPT_SCHEMA)
+    data = gemini([{"text": prompt}], SCRIPT_SCHEMA, timeout=120, attempts=2)
     log(f"[대본] 뉴스 {len(data['stories'])}개 작성")
     return data
 
@@ -187,7 +190,7 @@ def verify_script(data, news):
               "- 일반 상식 수준의 짧은 용어 설명은 허용(ok=true).\n"
               "- 고칠 수 있으면 fixed_text에 출처에 맞게 고친 문장(해요체)을, 아니면 빈 문자열.\n"
               "- 단정하면 안 되는 혐의를 단정했으면 ok=false 로 하고 고쳐.\n\n" + "\n\n".join(blocks) + "\n\nJSON으로만 답해.")
-    res = gemini([{"text": prompt}], VERIFY_SCHEMA, temp=0)
+    res = gemini([{"text": prompt}], VERIFY_SCHEMA, temp=0, timeout=120, attempts=2)
     bad = 0
     for r in res["results"]:
         try:
@@ -231,23 +234,41 @@ def fallback_script(news):
 IMG_SCHEMA = {"type": "OBJECT", "properties": {"ok": {"type": "ARRAY", "items": {"type": "INTEGER"}}}, "required": ["ok"]}
 
 
+VET_DEADLINE = None   # 이 시각이 지나면 사진 검수를 멈추고 이모지 장면 사용
+_last_vet = [0.0]
+_vet_fail = [0]
+
+
 def vet_images(sentence, cands):
-    """Gemini가 사진을 직접 보고 쓸 수 있는 것만 고름"""
+    """Gemini가 사진을 직접 보고 쓸 수 있는 것만 고름 (실패하면 사진 안 씀 = 안전한 쪽)"""
     if not cands or not os.environ.get("GEMINI_API_KEY"):
         return []
+    if VET_DEADLINE and now_kst() > VET_DEADLINE:
+        log("  사진 검수 마감 시간 지남 → 이모지 장면 사용")
+        return []
+    if _vet_fail[0] >= 4:  # 연속 실패가 많으면 오늘은 사진 검수 중단
+        return []
+    wait = 7 - (time.time() - _last_vet[0])  # 무료 사용량 제한을 피하려고 간격 두기
+    if wait > 0:
+        time.sleep(wait)
+    _last_vet[0] = time.time()
     parts = [{"text": f"""뉴스 문장: "{sentence}"
 아래 사진들 중 이 문장의 배경 화면으로 써도 되는 사진 번호만 골라.
 반드시 제외: ① 사람 얼굴이 알아볼 수 있게 나온 사진(군중·인물사진 포함) ② 문장과 관련 없는 장소·회사·제품 ③ 다른 회사 로고나 간판이 크게 보이는 사진(문장 속 회사 제외) ④ 그림·지도·국기·동전·도표 ⑤ 북한·특정 국가를 잘못 연상시키는 사진 ⑥ 폭력·시신 등 불쾌한 사진.
 애매하면 제외해. JSON {{"ok": [번호...]}}로만 답해."""}]
     for i, (path, _) in enumerate(cands):
         im = Image.open(path).convert("RGB")
-        im.thumbnail((512, 512))
+        im.thumbnail((384, 384))
         b = io.BytesIO(); im.save(b, "JPEG", quality=80)
         parts += [{"text": f"사진 {i}:"}, {"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(b.getvalue()).decode()}}]
     try:
-        return [i for i in gemini(parts, IMG_SCHEMA, temp=0)["ok"] if 0 <= i < len(cands)]
+        ok = [i for i in gemini(parts, IMG_SCHEMA, temp=0, timeout=60, prefer_lite=True, max_models=2, attempts=1)["ok"]
+              if 0 <= i < len(cands)]
+        _vet_fail[0] = 0
+        return ok
     except Exception as e:
-        log("  사진 검수 실패 → 사진 사용 안 함:", e)
+        _vet_fail[0] += 1
+        log("  사진 검수 실패 → 이 장면은 이모지:", str(e)[:80])
         return []
 
 
@@ -255,7 +276,9 @@ def pick_images(line, tag, n):
     """후보 사진 받기 → AI 검수 → 통과한 것만 n장"""
     if not line.get("image_queries"):
         return []
-    cands = RP.get_images(line["image_queries"], min(6, n + 3), tag)
+    if VET_DEADLINE and now_kst() > VET_DEADLINE:  # 시간이 모자라면 사진 검색도 생략
+        return []
+    cands = RP.get_images(line["image_queries"], min(4, n + 2), tag)
     ok = vet_images(line["text"], cands)
     keep = [cands[i] for i in ok][:n]
     log(f"   사진 후보 {len(cands)} → 통과 {len(ok)} → 사용 {len(keep)}")
@@ -499,6 +522,12 @@ def main():
     date_label = f"{start.month}월 {start.day}일 ({days[start.weekday()]})"
     today_label = f"{start.month}월 {start.day}일 {days[start.weekday()]}요일"
     log(f"시작 {start:%Y-%m-%d %H:%M:%S} KST, dry_run={a.dry_run}")
+    global VET_DEADLINE
+    hh, mm = map(int, a.at.split(":"))
+    post_at = start.replace(hour=hh, minute=mm, second=0, microsecond=0)
+    # 게시 40분 전까지는 영상이 완성되도록: 사진 검수는 (게시 70분 전) 또는 (시작 후 60분) 중 빠른 때까지만
+    VET_DEADLINE = min(start + dt.timedelta(minutes=60), post_at - dt.timedelta(minutes=70)) \
+        if (not a.dry_run and not a.now and post_at > start) else start + dt.timedelta(minutes=60)
 
     if not a.dry_run and already_posted_today():
         log("오늘 이미 게시됨 → 종료"); return
