@@ -2,99 +2,33 @@
   "stories": [
     {
       "source_ids": [
-        14
+        6
       ],
       "tag": "경제",
-      "title": "기준금리 인상\n연 3.25%로",
+      "title": "서울 집값 주춤\n하락 전환 구 늘어",
       "lines": [
         {
-          "text": "한국은행이 기준금리를 연 3.25%로 인상했어요.",
+          "text": "서울 아파트값 상승세가 주춤해지며 보합권에 가까워졌어요.",
           "image_queries": [
-            "Bank of Korea building",
-            "interest rates graph"
+            "Seoul apartment building",
+            "real estate chart"
           ],
           "emojis": [
-            "🏦",
-            "📈",
+            "🏢",
+            "📉",
+            "🏙️"
+          ]
+        },
+        {
+          "text": "광진구와 영등포구도 내림세로 돌아서며 하락 지역이 늘고 있대요.",
+          "image_queries": [
+            "Seoul city view",
+            "housing market graphic"
+          ],
+          "emojis": [
+            "📉",
+            "🏘️",
             "📊"
-          ]
-        },
-        {
-          "text": "금통위원 가운데 2명은 금리 동결이 바람직하다며 반대표를 던졌대요.",
-          "image_queries": [
-            "central bank conference",
-            "finance documents"
-          ],
-          "emojis": [
-            "⚖️",
-            "📉",
-            "💼"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        10
-      ],
-      "tag": "국제",
-      "title": "정유시설 피격\n국제유가 급등",
-      "lines": [
-        {
-          "text": "후티 반군이 사우디 정유시설을 공격하면서 국제유가가 3.5% 급등했어요.",
-          "image_queries": [
-            "oil refinery flames",
-            "oil barrels storage"
-          ],
-          "emojis": [
-            "🛢️",
-            "🔥",
-            "📈"
-          ]
-        },
-        {
-          "text": "유가 급등 여파로 대한항공 주가가 장중 6%대 하락하며 항공주가 약세를 보였대요.",
-          "image_queries": [
-            "commercial airplane airport",
-            "stock market board display"
-          ],
-          "emojis": [
-            "✈️",
-            "📉",
-            "⛽"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        17
-      ],
-      "tag": "경제",
-      "title": "실질소득 감소\n3년 만에 최대",
-      "lines": [
-        {
-          "text": "물가를 반영한 지난 3분기 가계 실질소득이 2.1% 줄어들었어요.",
-          "image_queries": [
-            "empty leather wallet",
-            "grocery shopping price tag"
-          ],
-          "emojis": [
-            "💸",
-            "📉",
-            "🛒"
-          ]
-        },
-        {
-          "text": "약 3년 만에 가장 큰 감소 폭으로, 가계 여윳돈도 11%나 줄어들었대요.",
-          "image_queries": [
-            "family budget planning",
-            "korean won banknotes"
-          ],
-          "emojis": [
-            "👛",
-            "🧾",
-            "📉"
           ]
         }
       ]
@@ -104,46 +38,145 @@
         8
       ],
       "tag": "사회",
-      "title": "'리트 만점자'\n압수수색 착수",
+      "title": "무고성 신고 막는다\n교사 보호 대책 발표",
       "lines": [
         {
-          "text": "경찰이 부정 시험 의혹을 받는 법학적성시험 만점자의 자택을 압수수색했어요.",
+          "text": "무고하거나 악의적인 아동학대 신고로 교권이 침해되지 않도록 정부가 대책을 추진해요.",
           "image_queries": [
-            "police evidence box",
-            "investigation documents seizure"
-          ],
-          "emojis": [
-            "🚨",
-            "📦",
-            "🔍"
-          ]
-        },
-        {
-          "text": "수능 시험지가 보관됐던 고등학교와 관련 과외 교사까지 수사가 번지고 있대요.",
-          "image_queries": [
-            "high school test paper",
-            "police station interior"
+            "school classroom Korea",
+            "teacher desk"
           ],
           "emojis": [
             "🏫",
-            "📝",
-            "👮"
+            "🛡️",
+            "📜"
+          ]
+        },
+        {
+          "text": "혐의가 명백히 없는 경우 수사를 신속하게 종결해 교사를 보호할 방침이에요.",
+          "image_queries": [
+            "government building Seoul",
+            "law document"
+          ],
+          "emojis": [
+            "👩‍🏫",
+            "⚖️",
+            "✅"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        0
+        9
       ],
-      "tag": "법원",
-      "title": "계엄 위증 혐의\n대법원 무죄 확정",
+      "tag": "사건사고",
+      "title": "리트 만점자 부정 의혹\n경찰 자택 압수수색",
       "lines": [
         {
-          "text": "윤석열 전 대통령의 계엄 관련 위증 혐의에 대해 대법원이 무죄를 확정했어요.",
+          "text": "경찰이 법학적성시험 만점자의 부정 시험 의혹을 수사하기 위해 자택을 압수수색했어요.",
+          "image_queries": [
+            "police investigation police car",
+            "apartment door"
+          ],
+          "emojis": [
+            "🚨",
+            "🏠",
+            "🔍"
+          ]
+        },
+        {
+          "text": "수능 시험지가 보관되었던 고등학교까지 함께 수사하며 조력자 여부를 파악 중이래요.",
+          "image_queries": [
+            "high school building",
+            "test papers envelope"
+          ],
+          "emojis": [
+            "🏫",
+            "📄",
+            "🔎"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        4
+      ],
+      "tag": "안보",
+      "title": "김정은 핵시설 시찰\n전술핵 운용 강조",
+      "lines": [
+        {
+          "text": "북한 김정은이 핵시설을 연달아 찾아 전술핵을 다영역에서 활용해야 한다고 주장했어요.",
+          "image_queries": [
+            "military facility aerial view",
+            "satellite antenna field"
+          ],
+          "emojis": [
+            "⚠️",
+            "🏭",
+            "🛰️"
+          ]
+        },
+        {
+          "text": "이에 우리 군과 국방부는 북한의 전술핵 운용 확대 의지를 엄중하게 지켜보고 있대요.",
+          "image_queries": [
+            "Ministry of National Defense Korea",
+            "military radar"
+          ],
+          "emojis": [
+            "🛡️",
+            "👀",
+            "🇰🇷"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        18
+      ],
+      "tag": "IT",
+      "title": "GTA6 해킹 비상\nAI 불법 제작 시도",
+      "lines": [
+        {
+          "text": "대작 게임 GTA6의 유출된 파일을 이용해 AI로 불법 PC판을 만드려는 시도가 있었어요.",
+          "image_queries": [
+            "video game controller",
+            "computer code screen"
+          ],
+          "emojis": [
+            "🎮",
+            "💻",
+            "🤖"
+          ]
+        },
+        {
+          "text": "배급사 측은 불법 해적판 제작 시도를 대거 차단하며 저작권 보호에 총력을 기울이고 있대요.",
+          "image_queries": [
+            "cyber security shield",
+            "server room lights"
+          ],
+          "emojis": [
+            "🔒",
+            "🛡️",
+            "🚫"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        1
+      ],
+      "tag": "법원",
+      "title": "위증 혐의 재판\n윤석열 무죄 확정",
+      "lines": [
+        {
+          "text": "계엄 당시 국무회의 관련 위증 혐의로 재판받은 윤석열의 무죄가 확정되었어요.",
           "image_queries": [
             "Supreme Court of Korea",
-            "wooden court gavel"
+            "gavel justice scale"
           ],
           "emojis": [
             "⚖️",
@@ -152,52 +185,19 @@
           ]
         },
         {
-          "text": "재판부는 계엄 전 국무회의 소집 진술이 허위라는 입증이 부족하다고 봤대요.",
+          "text": "대법원은 허위 진술을 입증할 증거가 부족하다고 판단해 최종 무죄를 확정했어요.",
           "image_queries": [
-            "legal document paperwork",
-            "law book courtroom"
+            "courtroom bench",
+            "law book gavel"
           ],
           "emojis": [
-            "📄",
+            "🔨",
             "⚖️",
             "🔍"
           ]
         }
       ]
-    },
-    {
-      "source_ids": [
-        19
-      ],
-      "tag": "IT",
-      "title": "소행성 충돌 실험\n거대 분화구 포착",
-      "lines": [
-        {
-          "text": "나사가 지구 방어를 위해 우주선을 충돌시켰던 소행성 흔적이 4년 만에 포착됐어요.",
-          "image_queries": [
-            "asteroid space collision",
-            "deep space crater surface"
-          ],
-          "emojis": [
-            "🌌",
-            "☄️",
-            "💥"
-          ]
-        },
-        {
-          "text": "충돌 지점에는 무려 경기장 크기의 거대한 분화구가 새로 파였다고 해요.",
-          "image_queries": [
-            "impact crater space photo",
-            "space telescope photograph"
-          ],
-          "emojis": [
-            "🔭",
-            "🪐",
-            "🏟️"
-          ]
-        }
-      ]
     }
   ],
-  "weather": "오늘은 낮 기온이 오르지만 바람이 강하게 불어 쌀쌀하고 일교차가 크겠어요."
+  "weather": ""
 }
