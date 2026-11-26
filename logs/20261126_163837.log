@@ -1,0 +1,27 @@
+시작 2026-11-26 16:30:56 KST, dry_run=False
+[수집] 뉴스 묶음 25개
+  사용할 Gemini 모델 순서: ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash']
+  Gemini 오류(gemini-3.8-flash): 429
+  Gemini 오류(gemini-3.8-flash): 429
+  Gemini 재시도(gemini-3.7-flash, 1): The read operation timed out
+  Gemini 오류(gemini-3.7-flash): 429
+  Gemini 오류(gemini-3.6-flash): 503
+  Gemini 오류(gemini-3.6-flash): 503
+  Gemini 오류(gemini-3.5-flash): 503
+  Gemini 오류(gemini-3.5-flash): 503
+대본 AI 실패: Gemini 실패: HTTP Error 503: Service Unavailable
+[대본] Gemini 없이 제목 기반 대본 사용
+== [1/7] 11월 26일 목요일 핵심만 빠르게
+   사진 후보 4 → 통과 4 → 사용 2
+== [2/7] 윤석열 ‘한덕수 재판 위증 혐의’ 대법서 무죄 확정
+== [3/7] 국민의힘, ‘조작 징계’ 의혹 제기한 황경성 윤리위원 해임
+== [4/7] "권력이 원하는 결론만 되나" 현직 판사, 조희대 탄핵 비판
+== [5/7] 與추천 ‘조작 기소’ 특검 후보에 이임성 변호사
+== [6/7] 한준호 첫 출근 "갓난아이 돌보는 심정으로 매일 깨어 있
+== [7/7] 오늘 하루도 좋은 하루 보내세요
+   사진 후보 3 → 통과 1 → 사용 1
+[영상] 완료 30.3초 (사진 장면 3, 이모지 장면 7)
+[점검] 길이 30.3초, 용량 11.1MB, 문제 0개 []
+[업로드] 공개 주소(GitHub Pages): https://jay0504-blip.github.io/news9am/news_20261126_163740.mp4
+[인스타] 게시 준비 완료: 17876640543661444
+[시험] 게시 직전 단계까지 성공 → 게시하지 않고 종료 (준비된 게시물은 24시간 뒤 자동 삭제)

@@ -2,165 +2,18 @@
   "stories": [
     {
       "source_ids": [
-        6
+        0
       ],
-      "tag": "경제",
-      "title": "서울 집값 주춤\n하락 전환 구 늘어",
+      "tag": "뉴스",
+      "title": "윤석열 ‘한덕수 재판 위증\n혐의’ 대법서 무죄 확정",
       "lines": [
         {
-          "text": "서울 아파트값 상승세가 주춤해지며 보합권에 가까워졌어요.",
-          "image_queries": [
-            "Seoul apartment building",
-            "real estate chart"
-          ],
+          "text": "윤석열 ‘한덕수 재판 위증 혐의’ 대법서 무죄 확정, 라는 소식이에요.",
+          "image_queries": [],
           "emojis": [
-            "🏢",
-            "📉",
-            "🏙️"
-          ]
-        },
-        {
-          "text": "광진구와 영등포구도 내림세로 돌아서며 하락 지역이 늘고 있대요.",
-          "image_queries": [
-            "Seoul city view",
-            "housing market graphic"
-          ],
-          "emojis": [
-            "📉",
-            "🏘️",
-            "📊"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        8
-      ],
-      "tag": "사회",
-      "title": "무고성 신고 막는다\n교사 보호 대책 발표",
-      "lines": [
-        {
-          "text": "무고하거나 악의적인 아동학대 신고로 교권이 침해되지 않도록 정부가 대책을 추진해요.",
-          "image_queries": [
-            "school classroom Korea",
-            "teacher desk"
-          ],
-          "emojis": [
-            "🏫",
-            "🛡️",
-            "📜"
-          ]
-        },
-        {
-          "text": "혐의가 명백히 없는 경우 수사를 신속하게 종결해 교사를 보호할 방침이에요.",
-          "image_queries": [
-            "government building Seoul",
-            "law document"
-          ],
-          "emojis": [
-            "👩‍🏫",
-            "⚖️",
-            "✅"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        9
-      ],
-      "tag": "사건사고",
-      "title": "리트 만점자 부정 의혹\n경찰 자택 압수수색",
-      "lines": [
-        {
-          "text": "경찰이 법학적성시험 만점자의 부정 시험 의혹을 수사하기 위해 자택을 압수수색했어요.",
-          "image_queries": [
-            "police investigation police car",
-            "apartment door"
-          ],
-          "emojis": [
-            "🚨",
-            "🏠",
-            "🔍"
-          ]
-        },
-        {
-          "text": "수능 시험지가 보관되었던 고등학교까지 함께 수사하며 조력자 여부를 파악 중이래요.",
-          "image_queries": [
-            "high school building",
-            "test papers envelope"
-          ],
-          "emojis": [
-            "🏫",
-            "📄",
-            "🔎"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        4
-      ],
-      "tag": "안보",
-      "title": "김정은 핵시설 시찰\n전술핵 운용 강조",
-      "lines": [
-        {
-          "text": "북한 김정은이 핵시설을 연달아 찾아 전술핵을 다영역에서 활용해야 한다고 주장했어요.",
-          "image_queries": [
-            "military facility aerial view",
-            "satellite antenna field"
-          ],
-          "emojis": [
-            "⚠️",
-            "🏭",
-            "🛰️"
-          ]
-        },
-        {
-          "text": "이에 우리 군과 국방부는 북한의 전술핵 운용 확대 의지를 엄중하게 지켜보고 있대요.",
-          "image_queries": [
-            "Ministry of National Defense Korea",
-            "military radar"
-          ],
-          "emojis": [
-            "🛡️",
-            "👀",
-            "🇰🇷"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        18
-      ],
-      "tag": "IT",
-      "title": "GTA6 해킹 비상\nAI 불법 제작 시도",
-      "lines": [
-        {
-          "text": "대작 게임 GTA6의 유출된 파일을 이용해 AI로 불법 PC판을 만드려는 시도가 있었어요.",
-          "image_queries": [
-            "video game controller",
-            "computer code screen"
-          ],
-          "emojis": [
-            "🎮",
-            "💻",
-            "🤖"
-          ]
-        },
-        {
-          "text": "배급사 측은 불법 해적판 제작 시도를 대거 차단하며 저작권 보호에 총력을 기울이고 있대요.",
-          "image_queries": [
-            "cyber security shield",
-            "server room lights"
-          ],
-          "emojis": [
-            "🔒",
-            "🛡️",
-            "🚫"
+            "📰",
+            "🗞️",
+            "📢"
           ]
         }
       ]
@@ -169,31 +22,70 @@
       "source_ids": [
         1
       ],
-      "tag": "법원",
-      "title": "위증 혐의 재판\n윤석열 무죄 확정",
+      "tag": "뉴스",
+      "title": "국민의힘, ‘조작 징계’ 의혹\n제기한 황경성 윤리위원 해임",
       "lines": [
         {
-          "text": "계엄 당시 국무회의 관련 위증 혐의로 재판받은 윤석열의 무죄가 확정되었어요.",
-          "image_queries": [
-            "Supreme Court of Korea",
-            "gavel justice scale"
-          ],
+          "text": "국민의힘, ‘조작 징계’ 의혹 제기한 황경성 윤리위원 해임, 라는 소식이에요.",
+          "image_queries": [],
           "emojis": [
-            "⚖️",
-            "🏛️",
-            "📜"
+            "📰",
+            "🗞️",
+            "📢"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        2
+      ],
+      "tag": "뉴스",
+      "title": "\"권력이 원하는 결론만 되나\"\n현직 판사, 조희대 탄핵 비판",
+      "lines": [
         {
-          "text": "대법원은 허위 진술을 입증할 증거가 부족하다고 판단해 최종 무죄를 확정했어요.",
-          "image_queries": [
-            "courtroom bench",
-            "law book gavel"
-          ],
+          "text": "\"권력이 원하는 결론만 되나\" 현직 판사, 조희대 탄핵 비판, 라는 소식이에요.",
+          "image_queries": [],
           "emojis": [
-            "🔨",
-            "⚖️",
-            "🔍"
+            "📰",
+            "🗞️",
+            "📢"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        3
+      ],
+      "tag": "뉴스",
+      "title": "與추천 ‘조작 기소’ 특검\n후보에 이임성 변호사",
+      "lines": [
+        {
+          "text": "與추천 ‘조작 기소’ 특검 후보에 이임성 변호사, 라는 소식이에요.",
+          "image_queries": [],
+          "emojis": [
+            "📰",
+            "🗞️",
+            "📢"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        4
+      ],
+      "tag": "뉴스",
+      "title": "한준호 첫 출근 \"갓난아이\n돌보는 심정으로 매일 깨어 있",
+      "lines": [
+        {
+          "text": "한준호 첫 출근 \"갓난아이 돌보는 심정으로 매일 깨어 있겠다\", 라는 소식이에요.",
+          "image_queries": [],
+          "emojis": [
+            "📰",
+            "🗞️",
+            "📢"
           ]
         }
       ]
