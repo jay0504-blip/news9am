@@ -67,6 +67,36 @@ def fetch_news(n=25):
 
 
 # ───────────────────────── 2. Gemini ─────────────────────────
+_models = None
+
+
+def gemini_models(key):
+    """지금 쓸 수 있는 Gemini 모델을 직접 조회해서 최신 flash 계열부터 사용 (모델 이름이 바뀌어도 동작)"""
+    global _models
+    if _models is not None:
+        return _models
+    found = []
+    try:
+        r = json.loads(http(f"https://generativelanguage.googleapis.com/v1beta/models?pageSize=200&key={key}", timeout=30))
+        for m in r.get("models", []):
+            name = m["name"].split("/")[-1]
+            if "generateContent" not in m.get("supportedGenerationMethods", []):
+                continue
+            if "flash" not in name or any(b in name for b in ("image", "tts", "live", "audio", "embedding", "thinking-exp")):
+                continue
+            found.append(name)
+    except Exception as e:
+        log("  모델 목록 조회 실패:", e)
+
+    def rank(n):
+        v = re.search(r"(\d+(?:\.\d+)?)", n)
+        return (float(v.group(1)) if v else 0, "lite" not in n, "preview" not in n and "exp" not in n, -len(n))
+    found.sort(key=rank, reverse=True)
+    _models = found[:4] + [m for m in GEMINI_MODELS if m not in found]
+    log("  사용할 Gemini 모델 순서:", _models[:4])
+    return _models
+
+
 def gemini(parts, schema=None, temp=0.4):
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
@@ -76,13 +106,19 @@ def gemini(parts, schema=None, temp=0.4):
         cfg["responseSchema"] = schema
     body = json.dumps({"contents": [{"role": "user", "parts": parts}], "generationConfig": cfg}).encode()
     last = None
-    for model in GEMINI_MODELS:
-        for attempt in range(4):
+    for model in gemini_models(key):
+        for attempt in range(3):
             try:
                 r = json.loads(http(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
                                     data=body, headers={"Content-Type": "application/json"}, timeout=180))
                 txt = r["candidates"][0]["content"]["parts"][0]["text"]
                 return json.loads(txt)
+            except urllib.error.HTTPError as e:
+                last = e
+                log(f"  Gemini 오류({model}): {e.code}")
+                if e.code in (400, 403, 404):  # 이 모델은 못 씀 → 다음 모델
+                    break
+                time.sleep(15 * (attempt + 1))  # 429(사용량)·5xx → 기다렸다 재시도
             except Exception as e:
                 last = e
                 log(f"  Gemini 재시도({model}, {attempt + 1}): {str(e)[:120]}")
