@@ -1,0 +1,79 @@
+name: 아침 뉴스 자동 게시
+
+on:
+  schedule:
+    # GitHub 예약 실행은 몇 분~수십 분 늦을 수 있어서 일찍 시작하고, 9:00:00(KST)에 정확히 게시
+    - cron: "0 22 * * *"    # 매일 07:00 KST (주 실행)
+    - cron: "40 22 * * *"   # 매일 07:40 KST (예비: 주 실행이 빠졌을 때만 동작)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = 영상만 만들기 / now = 지금 바로 게시 / normal = 9시에 게시"
+        default: "test"
+        type: choice
+        options: [test, now, normal]
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 한글 글꼴 설치
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+
+      - name: 패키지 설치
+        run: pip install -r requirements.txt
+
+      - name: 이모지·사진 캐시
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: media-cache-${{ github.run_id }}
+          restore-keys: media-cache-
+
+      - name: 뉴스 영상 만들고 게시
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          MODE="${{ github.event.inputs.mode || 'normal' }}"
+          if [ "$MODE" = "test" ]; then python daily.py --dry-run
+          elif [ "$MODE" = "now" ]; then python daily.py --now
+          else python daily.py --at 09:00
+          fi
+
+      - name: 결과 영상 보관 (7일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-${{ github.run_id }}
+          path: |
+            work/news.mp4
+            work/caption.txt
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: 기록 저장 (예약 실행이 멈추지 않도록 저장소 활동 유지)
+        if: always()
+        run: |
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add logs script_*.json 2>/dev/null || true
+          git commit -m "log: $(date +%F)" || true
+          git push || true
