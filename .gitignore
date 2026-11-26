@@ -1,0 +1,6 @@
+.env
+work/
+cache/
+out*/
+__pycache__/
+*.mp4
