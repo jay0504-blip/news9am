@@ -4,88 +4,163 @@
       "source_ids": [
         0
       ],
-      "tag": "뉴스",
-      "title": "윤석열 ‘한덕수 재판 위증\n혐의’ 대법서 무죄 확정",
+      "tag": "법원",
+      "title": "윤석열 위증 혐의\n대법원 무죄 확정",
       "lines": [
         {
-          "text": "윤석열 ‘한덕수 재판 위증 혐의’ 대법서 무죄 확정, 라는 소식이에요.",
-          "image_queries": [],
+          "text": "윤석열 전 대통령의 한덕수 재판 위증 혐의에 대해 대법원에서 무죄가 확정됐대요.",
+          "image_queries": [
+            "Supreme Court of Korea",
+            "courtroom gavel"
+          ],
           "emojis": [
-            "📰",
-            "🗞️",
-            "📢"
+            "⚖️",
+            "🏛️",
+            "📜"
+          ]
+        },
+        {
+          "text": "대법원은 허위 진술 입증이 부족하다는 이유로 검찰의 상고를 기각했다고해요.",
+          "image_queries": [
+            "Korean legal gavel",
+            "justice scales"
+          ],
+          "emojis": [
+            "🔍",
+            "⚖️",
+            "📄"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        1
+        6
       ],
-      "tag": "뉴스",
-      "title": "국민의힘, ‘조작 징계’ 의혹\n제기한 황경성 윤리위원 해임",
+      "tag": "경제",
+      "title": "서울 아파트값\n강남·한강벨트 하락",
       "lines": [
         {
-          "text": "국민의힘, ‘조작 징계’ 의혹 제기한 황경성 윤리위원 해임, 라는 소식이에요.",
-          "image_queries": [],
+          "text": "서울 아파트값이 94주 연속 오르고 있지만 상승률은 최저를 기록했대요.",
+          "image_queries": [
+            "Seoul apartment buildings",
+            "residential skyscraper"
+          ],
           "emojis": [
-            "📰",
-            "🗞️",
-            "📢"
+            "🏙️",
+            "📉",
+            "🏢"
+          ]
+        },
+        {
+          "text": "특히 강남 3구와 용산 등 한강벨트를 중심으로 집값이 하락세로 돌아섰어요.",
+          "image_queries": [
+            "Han River view Seoul",
+            "Seoul city skyline"
+          ],
+          "emojis": [
+            "📉",
+            "🏙️",
+            "🏘️"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        2
+        10
       ],
-      "tag": "뉴스",
-      "title": "\"권력이 원하는 결론만 되나\"\n현직 판사, 조희대 탄핵 비판",
+      "tag": "국제",
+      "title": "후티 사우디 공격\n국제유가 급등",
       "lines": [
         {
-          "text": "\"권력이 원하는 결론만 되나\" 현직 판사, 조희대 탄핵 비판, 라는 소식이에요.",
-          "image_queries": [],
+          "text": "예멘 후티 반군이 사우디아라비아 정유시설을 전격 공습했다고 해요.",
+          "image_queries": [
+            "oil refinery industrial",
+            "petroleum tank"
+          ],
           "emojis": [
-            "📰",
-            "🗞️",
-            "📢"
+            "🛢️",
+            "🔥",
+            "💥"
+          ]
+        },
+        {
+          "text": "이 영향으로 브렌트유가 3.5% 오르는 등 국제유가가 다시 급등했어요.",
+          "image_queries": [
+            "crude oil barrel",
+            "financial chart rise"
+          ],
+          "emojis": [
+            "📈",
+            "🛢️",
+            "💵"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        3
+        14
       ],
-      "tag": "뉴스",
-      "title": "與추천 ‘조작 기소’ 특검\n후보에 이임성 변호사",
+      "tag": "경제",
+      "title": "한은 기준금리 인상\n성장률 전망 상향",
       "lines": [
         {
-          "text": "與추천 ‘조작 기소’ 특검 후보에 이임성 변호사, 라는 소식이에요.",
-          "image_queries": [],
+          "text": "한국은행이 기준금리를 연 3.25%로 추가 인상하기로 결정했대요.",
+          "image_queries": [
+            "Bank of Korea building",
+            "Korean Won money"
+          ],
           "emojis": [
-            "📰",
-            "🗞️",
-            "📢"
+            "🏦",
+            "📊",
+            "💵"
+          ]
+        },
+        {
+          "text": "한편 내년도 경제성장률 전망치는 4.1%로 대폭 올려 잡았다고 해요.",
+          "image_queries": [
+            "economy growth graph",
+            "stock market chart"
+          ],
+          "emojis": [
+            "📈",
+            "📊",
+            "🇰🇷"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        4
+        18
       ],
-      "tag": "뉴스",
-      "title": "한준호 첫 출근 \"갓난아이\n돌보는 심정으로 매일 깨어 있",
+      "tag": "IT",
+      "title": "소행성 충돌 실험\n4년 만에 흔적 포착",
       "lines": [
         {
-          "text": "한준호 첫 출근 \"갓난아이 돌보는 심정으로 매일 깨어 있겠다\", 라는 소식이에요.",
-          "image_queries": [],
+          "text": "지구 방어를 위해 우주선을 소행성에 충돌시켰던 실험 흔적이 포착됐어요.",
+          "image_queries": [
+            "asteroid in space",
+            "spacecraft probe"
+          ],
           "emojis": [
-            "📰",
-            "🗞️",
-            "📢"
+            "☄️",
+            "🚀",
+            "🪐"
+          ]
+        },
+        {
+          "text": "충돌 4년 만에 소행성 표면에 경기장 크기의 거대 분화구가 확인됐대요.",
+          "image_queries": [
+            "meteor crater surface",
+            "moon crater texture"
+          ],
+          "emojis": [
+            "🌕",
+            "💥",
+            "🔭"
           ]
         }
       ]
