@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "test = 영상만 만들기 / now = 지금 바로 게시 / normal = 9시에 게시"
+        description: "test = 영상만 / prepare = 게시 직전까지 시험 / now = 지금 바로 게시 / normal = 9시에 게시"
         default: "test"
         type: choice
-        options: [test, now, normal]
+        options: [test, prepare, now, normal]
 
 concurrency:
   group: daily-news
@@ -57,6 +57,7 @@ jobs:
         run: |
           MODE="${{ github.event.inputs.mode || 'normal' }}"
           if [ "$MODE" = "test" ]; then python daily.py --dry-run
+          elif [ "$MODE" = "prepare" ]; then python daily.py --prepare-only
           elif [ "$MODE" = "now" ]; then python daily.py --now
           else python daily.py --at 09:00
           fi
@@ -79,4 +80,4 @@ jobs:
           git config user.email "news-bot@users.noreply.github.com"
           git add logs script_*.json 2>/dev/null || true
           git commit -m "log: $(date +%F)" || true
-          git push || true
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done || true
