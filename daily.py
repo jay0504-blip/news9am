@@ -92,7 +92,7 @@ def gemini_models(key):
         v = re.search(r"(\d+(?:\.\d+)?)", n)
         return (float(v.group(1)) if v else 0, "lite" not in n, "preview" not in n and "exp" not in n, -len(n))
     found.sort(key=rank, reverse=True)
-    _models = found[:6] + [m for m in GEMINI_MODELS if m not in found]
+    _models = found[:8] + [m for m in GEMINI_MODELS if m not in found]
     log("  사용할 Gemini 모델 순서:", _models[:4])
     return _models
 
@@ -167,7 +167,7 @@ def write_script(news, today):
 - 날씨 기사가 있으면 weather에 한 문장(해요체)으로, 없으면 빈 문자열.
 - source_ids: 그 뉴스의 근거가 된 묶음 번호들.
 JSON으로만 답해."""
-    data = gemini([{"text": prompt}], SCRIPT_SCHEMA, timeout=120, attempts=2)
+    data = gemini([{"text": prompt}], SCRIPT_SCHEMA, timeout=120, attempts=2, max_models=8)
     log(f"[대본] 뉴스 {len(data['stories'])}개 작성")
     return data
 
@@ -191,7 +191,7 @@ def verify_script(data, news):
               "- 일반 상식 수준의 짧은 용어 설명은 허용(ok=true).\n"
               "- 고칠 수 있으면 fixed_text에 출처에 맞게 고친 문장(해요체)을, 아니면 빈 문자열.\n"
               "- 단정하면 안 되는 혐의를 단정했으면 ok=false 로 하고 고쳐.\n\n" + "\n\n".join(blocks) + "\n\nJSON으로만 답해.")
-    res = gemini([{"text": prompt}], VERIFY_SCHEMA, temp=0, timeout=120, attempts=2)
+    res = gemini([{"text": prompt}], VERIFY_SCHEMA, temp=0, timeout=120, attempts=2, max_models=8)
     bad = 0
     for r in res["results"]:
         try:
@@ -216,7 +216,10 @@ def verify_script(data, news):
 def fallback_script(news):
     """Gemini를 못 쓸 때: 기사 제목만으로 안전한 대본"""
     stories = []
-    for n in news[:5]:
+    politics = ("국힘", "민주당", "의원", "탄핵", "윤리위", "특검", "장관", "후보자", "당대표", "복당", "탈당")
+    ranked = [n for n in news if not any(w in n["title"] for w in politics)] + \
+             [n for n in news if any(w in n["title"] for w in politics)]
+    for n in ranked[:5]:
         t = re.sub(r"\s+-\s+[^-]+$", "", n["title"]).strip()
         t = re.sub(r"\[[^\]]+\]", "", t).strip()
         if len(t) > 15:  # 가운데 근처 띄어쓰기에서 두 줄로
@@ -571,14 +574,23 @@ def main():
         log("오늘 이미 게시됨 → 종료"); return
 
     news = fetch_news()
-    try:
-        data = write_script(news, today_label)
-        data = verify_script(data, news)
-        if len(data["stories"]) < 3:
-            raise RuntimeError("검수 후 뉴스가 너무 적음")
-    except Exception as e:
-        log("대본 AI 실패:", e)
-        data = fallback_script(news)
+    # 무료 AI가 붐빌 때가 있어서 최대 30분 동안 몇 번이고 다시 시도
+    script_deadline = now_kst() + dt.timedelta(minutes=30)
+    data, rnd = None, 0
+    while data is None:
+        rnd += 1
+        try:
+            d = write_script(news, today_label)
+            d = verify_script(d, news)
+            if len(d["stories"]) < 3:
+                raise RuntimeError("검수 후 뉴스가 너무 적음")
+            data = d
+        except Exception as e:
+            log(f"대본 AI 실패({rnd}회차):", str(e)[:150])
+            if now_kst() + dt.timedelta(minutes=2) > script_deadline:
+                data = fallback_script(news)
+            else:
+                time.sleep(90)
     json.dump(data, open(f"script_{start:%Y%m%d}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
     scenes = build_scenes(data, today_label)
