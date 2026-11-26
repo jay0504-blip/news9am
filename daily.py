@@ -436,8 +436,44 @@ def already_posted_today():
     return False
 
 
+def host_on_pages(path):
+    """GitHub Pages(무료)에 오늘 영상 한 개만 올려 공개 주소 만들기. 매번 덮어써서 용량이 쌓이지 않음"""
+    repo, token = os.environ.get("GITHUB_REPOSITORY"), os.environ.get("GITHUB_TOKEN")
+    if not repo or not token:
+        return None
+    owner, name = repo.split("/")
+    fname = f"news_{now_kst():%Y%m%d_%H%M%S}.mp4"
+    d = os.path.abspath("pages_out")
+    shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
+    shutil.copy(path, os.path.join(d, fname))
+    open(os.path.join(d, ".nojekyll"), "w").close()
+    open(os.path.join(d, "index.html"), "w").write("<meta charset=utf-8>news9am")
+    cmds = [["git", "init", "-q"], ["git", "checkout", "-q", "-b", "gh-pages"],
+            ["git", "-c", "user.name=news-bot", "-c", "user.email=news-bot@users.noreply.github.com", "add", "-A"],
+            ["git", "-c", "user.name=news-bot", "-c", "user.email=news-bot@users.noreply.github.com", "commit", "-q", "-m", fname],
+            ["git", "push", "-q", "-f", f"https://x-access-token:{token}@github.com/{repo}.git", "gh-pages"]]
+    for c in cmds:
+        r = subprocess.run(c, cwd=d, capture_output=True, text=True)
+        if r.returncode:
+            log("  Pages 업로드 실패:", r.stderr.replace(token, "***")[:200]); return None
+    url = f"https://{owner.lower()}.github.io/{name}/{fname}"
+    size = os.path.getsize(path)
+    for i in range(40):  # Pages 반영까지 보통 1~3분
+        time.sleep(15)
+        head = subprocess.run(["curl", "-sI", url], capture_output=True, text=True).stdout
+        first = head.splitlines()[0] if head else ""
+        if " 200" in first and "video/mp4" in head.lower() and str(size) in head:
+            log("[업로드] 공개 주소(GitHub Pages):", url)
+            return url
+    log("  Pages 반영 시간 초과")
+    return None
+
+
 def host_video(path):
-    """인스타가 가져갈 수 있는 임시 공개 주소 (72시간 뒤 자동 삭제)"""
+    """인스타가 가져갈 수 있는 공개 주소: GitHub Pages 우선, 안 되면 임시 업로드 서비스"""
+    url = host_on_pages(path)
+    if url:
+        return url
     tries = [("https://litterbox.catbox.moe/resources/internals/api.php", {"reqtype": "fileupload", "time": "72h"}, "fileToUpload"),
              ("https://catbox.moe/user/api.php", {"reqtype": "fileupload"}, "fileToUpload")]
     for url, fields, fname in tries:

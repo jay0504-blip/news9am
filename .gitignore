@@ -4,3 +4,4 @@ cache/
 out*/
 __pycache__/
 *.mp4
+pages_out/
