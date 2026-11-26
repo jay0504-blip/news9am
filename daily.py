@@ -517,6 +517,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="영상만 만들고 게시 안 함")
     ap.add_argument("--now", action="store_true", help="9시까지 기다리지 않고 바로 게시")
     ap.add_argument("--at", default="09:00", help="게시 시각 (KST)")
+    ap.add_argument("--prepare-only", action="store_true", help="게시 직전(인스타 준비)까지만 시험하고 게시 안 함")
     a = ap.parse_args()
     start = now_kst()
     days = "월화수목금토일"
@@ -530,7 +531,7 @@ def main():
     VET_DEADLINE = min(start + dt.timedelta(minutes=60), post_at - dt.timedelta(minutes=70)) \
         if (not a.dry_run and not a.now and post_at > start) else start + dt.timedelta(minutes=60)
 
-    if not a.dry_run and already_posted_today():
+    if not a.dry_run and not a.prepare_only and already_posted_today():
         log("오늘 이미 게시됨 → 종료"); return
 
     news = fetch_news()
@@ -563,6 +564,8 @@ def main():
 
     url = host_video(video)
     cid = prepare_container(url, caption)
+    if a.prepare_only:
+        log("[시험] 게시 직전 단계까지 성공 → 게시하지 않고 종료 (준비된 게시물은 24시간 뒤 자동 삭제)"); return
     if not a.now:
         hh, mm = map(int, a.at.split(":"))
         wait_until(hh, mm)
