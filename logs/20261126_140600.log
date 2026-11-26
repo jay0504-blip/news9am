@@ -1,0 +1,42 @@
+시작 2026-11-26 13:55:58 KST, dry_run=True
+[수집] 뉴스 묶음 25개
+  Gemini 재시도(gemini-2.5-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 4): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 4): HTTP Error 404: Not Found
+대본 AI 실패: Gemini 실패: HTTP Error 404: Not Found
+[대본] Gemini 없이 제목 기반 대본 사용
+== [1/7] 11월 26일 목요일 핵심만 빠르게
+  Gemini 재시도(gemini-2.5-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 4): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 4): HTTP Error 404: Not Found
+  사진 검수 실패 → 사진 사용 안 함: Gemini 실패: HTTP Error 404: Not Found
+   사진 후보 5 → 통과 0 → 사용 0
+== [2/7] ‘윤석열 계엄’ 사과 묻자…국힘 김민수 “민주당이 먼저 해야”
+== [3/7] 우재준 “나도 제명하려 했느냐” 장동혁 “탈당·창당이라는 좋은
+== [4/7] 현직 부장판사 "정치권력이 원하는 결론 아니면 탄핵 대상
+== [5/7] 북한, 핵잠 원자로 추정 장비 첫 공개…김정은 “핵보유국 굳
+== [6/7] 한준호 첫 출근 "갓난아이 돌보는 심정으로 매일 깨어 있
+== [7/7] 오늘 하루도 좋은 하루 보내세요
+  Gemini 재시도(gemini-2.5-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.5-flash, 4): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 1): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 2): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 3): HTTP Error 404: Not Found
+  Gemini 재시도(gemini-2.0-flash, 4): HTTP Error 404: Not Found
+  사진 검수 실패 → 사진 사용 안 함: Gemini 실패: HTTP Error 404: Not Found
+   사진 후보 4 → 통과 0 → 사용 0
+[영상] 완료 37.0초 (사진 장면 0, 이모지 장면 13)
+[점검] 길이 37.0초, 용량 13.3MB, 문제 0개 []
+[dry-run] 게시하지 않고 종료
