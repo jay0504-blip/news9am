@@ -1,0 +1,170 @@
+{
+  "stories": [
+    {
+      "source_ids": [
+        17
+      ],
+      "tag": "경제",
+      "title": "테슬라 머스크도\n진땀 뺀 이재용",
+      "lines": [
+        {
+          "text": "일론 머스크가 삼성에 반도체 장기 계약을 제안했어요.",
+          "image_queries": [
+            "Samsung semiconductor chip",
+            "microchip factory"
+          ],
+          "emojis": [
+            "💻",
+            "🤝",
+            "📈"
+          ]
+        },
+        {
+          "text": "이재용 회장이 뭘 더 해줄 거냐며 여유 있는 반응을 보였대요.",
+          "image_queries": [
+            "corporate office building",
+            "business handshake"
+          ],
+          "emojis": [
+            "🏢",
+            "💬",
+            "💼"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        1
+      ],
+      "tag": "법원",
+      "title": "윤석열 대통령\n위증 혐의 무죄",
+      "lines": [
+        {
+          "text": "대법원이 한덕수 재판 위증 혐의로 기소된 윤석열 대통령의 상고를 기각했어요.",
+          "image_queries": [
+            "Supreme Court of Korea",
+            "court gavel"
+          ],
+          "emojis": [
+            "⚖️",
+            "🏛️",
+            "📄"
+          ]
+        },
+        {
+          "text": "허위 진술을 입증할 증거가 부족하다며 무죄가 최종 확정되었대요.",
+          "image_queries": [
+            "law books",
+            "scales of justice"
+          ],
+          "emojis": [
+            "✅",
+            "📜",
+            "🔍"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        3
+      ],
+      "tag": "사건사고",
+      "title": "세무사시험 수석\nAI 커닝 의혹",
+      "lines": [
+        {
+          "text": "AI를 이용해 부정행위를 했다고 자수한 세무사시험 수석 합격자에게 구속영장이 신청되었어요.",
+          "image_queries": [
+            "police station",
+            "handcuffs on desk"
+          ],
+          "emojis": [
+            "🚨",
+            "👮",
+            "📝"
+          ]
+        },
+        {
+          "text": "경찰은 범죄의 중대성과 사회적 파급력을 고려해 영장을 신청했다고 밝혔대요.",
+          "image_queries": [
+            "police car lights",
+            "courthouse building"
+          ],
+          "emojis": [
+            "🔍",
+            "⚖️",
+            "⚠️"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        4
+      ],
+      "tag": "안보",
+      "title": "김정은, 핵시설 시찰\n전술핵 과시",
+      "lines": [
+        {
+          "text": "김정은 북한 국무위원장이 연달아 핵시설을 시찰하며 전술핵을 과시했어요.",
+          "image_queries": [
+            "nuclear power plant",
+            "military radar"
+          ],
+          "emojis": [
+            "☢️",
+            "🚀",
+            "⚠️"
+          ]
+        },
+        {
+          "text": "핵보유국 지위는 불가침이라며 접경지 배치를 시사하기도 했대요.",
+          "image_queries": [
+            "missile silo",
+            "industrial facility"
+          ],
+          "emojis": [
+            "🏭",
+            "🌐",
+            "📌"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        8
+      ],
+      "tag": "날씨",
+      "title": "오늘 포근하지만\n중부지방 가끔 비",
+      "lines": [
+        {
+          "text": "오늘 낮 최고 기온이 21도까지 오르는 등 포근한 날씨를 보이고 있어요.",
+          "image_queries": [
+            "sunny sky clouds",
+            "thermometer in spring"
+          ],
+          "emojis": [
+            "☀️",
+            "🌡️",
+            "🌤️"
+          ]
+        },
+        {
+          "text": "다만 중부지방을 중심으로 가끔 비가 내릴 수 있으니 우산을 챙기셔야 해요.",
+          "image_queries": [
+            "umbrella in rain",
+            "rain drops on window"
+          ],
+          "emojis": [
+            "☔",
+            "💧",
+            "🌧️"
+          ]
+        }
+      ]
+    }
+  ],
+  "weather": "오늘 낮 최고 기온이 21도까지 오르며 포근하겠지만 중부지방에는 가끔 비가 내릴 수 있어요."
+}
