@@ -250,23 +250,23 @@ def vet_images(sentence, cands):
     if VET_DEADLINE and now_kst() > VET_DEADLINE:
         log("  사진 검수 마감 시간 지남 → 이모지 장면 사용")
         return []
-    if _vet_fail[0] >= 4:  # 연속 실패가 많으면 오늘은 사진 검수 중단
+    if _vet_fail[0] >= 8:  # 연속 실패가 많으면 오늘은 사진 검수 중단
         return []
-    wait = 7 - (time.time() - _last_vet[0])  # 무료 사용량 제한을 피하려고 간격 두기
+    wait = 5 - (time.time() - _last_vet[0])  # 무료 사용량 제한을 피하려고 간격 두기
     if wait > 0:
         time.sleep(wait)
     _last_vet[0] = time.time()
     parts = [{"text": f"""뉴스 문장: "{sentence}"
 아래 사진들 중 이 문장의 배경 화면으로 써도 되는 사진 번호만 골라.
-반드시 제외: ① 사람 얼굴이 알아볼 수 있게 나온 사진(군중·인물사진 포함) ② 문장과 관련 없는 장소·회사·제품 ③ 다른 회사 로고나 간판이 크게 보이는 사진(문장 속 회사 제외) ④ 그림·지도·국기·동전·도표 ⑤ 북한·특정 국가를 잘못 연상시키는 사진 ⑥ 폭력·시신 등 불쾌한 사진.
-애매하면 제외해. JSON {{"ok": [번호...]}}로만 답해."""}]
+반드시 제외: ① 사람 얼굴이 크게 알아볼 수 있게 나온 사진(인물사진. 멀리서 작게 보이는 사람들은 괜찮아) ② 문장과 관련 없는 장소·회사·제품 ③ 다른 회사 로고나 간판이 크게 보이는 사진(문장 속 회사 제외) ④ 그림·지도·국기·동전·도표 ⑤ 북한·특정 국가를 잘못 연상시키는 사진 ⑥ 폭력·시신 등 불쾌한 사진.
+문장과 직접 관련된 실제 사진이 가장 좋고, 같은 분야를 보여주는 실제 사진(예: 증시 뉴스에 증권거래소, 철도 뉴스에 전철)도 괜찮아. 확실히 문제 있는 것만 제외해. JSON {{"ok": [번호...]}}로만 답해."""}]
     for i, (path, _) in enumerate(cands):
         im = Image.open(path).convert("RGB")
         im.thumbnail((384, 384))
         b = io.BytesIO(); im.save(b, "JPEG", quality=80)
         parts += [{"text": f"사진 {i}:"}, {"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(b.getvalue()).decode()}}]
     try:
-        ok = [i for i in gemini(parts, IMG_SCHEMA, temp=0, timeout=60, prefer_lite=True, max_models=2, attempts=1)["ok"]
+        ok = [i for i in gemini(parts, IMG_SCHEMA, temp=0, timeout=60, prefer_lite=True, max_models=3, attempts=2)["ok"]
               if 0 <= i < len(cands)]
         _vet_fail[0] = 0
         return ok
@@ -276,13 +276,31 @@ def vet_images(sentence, cands):
         return []
 
 
-def pick_images(line, tag, n):
+# 문장 검색어로 사진이 모자랄 때 쓰는 분야별 실사 검색어
+TAG_QUERIES = {
+    "경제": ["Seoul financial district", "stock market display", "Korean won banknotes", "container port Busan"],
+    "사회": ["Seoul street", "Seoul city hall", "Seoul subway station", "Korean school"],
+    "생활": ["Seoul market", "Seoul apartment complex", "Korean supermarket", "Seoul street"],
+    "사건사고": ["police car Seoul", "fire truck Korea", "ambulance Korea", "police line"],
+    "국제": ["United Nations headquarters New York", "Incheon International Airport terminal", "container ship sea", "airport departure board"],
+    "안보": ["Republic of Korea Navy destroyer", "Republic of Korea Air Force F-15K", "Republic of Korea Army K2 tank", "fighter jet"],
+    "법원": ["courtroom", "wooden gavel", "Supreme Court of Korea"],
+    "정치": ["National Assembly Proceeding Hall", "Yongsan Seoul", "Seoul Gwanghwamun", "voting booth"],
+    "IT": ["semiconductor wafer", "data center servers", "smartphone", "circuit board"],
+    "과학": ["telescope observatory", "rocket launch", "laboratory", "space Earth"],
+    "날씨": ["clouds sky", "rain umbrella street", "Seoul skyline sunny", "snow Seoul"],
+    "아침 뉴스": ["Seoul skyline", "Han River Seoul", "Seoul skyline morning"],
+}
+
+
+def pick_images(line, tag, n, scene_tag=""):
     """후보 사진 받기 → AI 검수 → 통과한 것만 n장"""
-    if not line.get("image_queries"):
-        return []
     if VET_DEADLINE and now_kst() > VET_DEADLINE:  # 시간이 모자라면 사진 검색도 생략
+        log("   사진 작업 마감 시간 지남")
         return []
-    cands = RP.get_images(line["image_queries"], min(4, n + 2), tag)
+    queries = list(line.get("image_queries") or [])
+    queries += [q for q in TAG_QUERIES.get(scene_tag, ["Seoul skyline"]) if q not in queries]
+    cands = RP.get_images(queries, max(5, n + 3), tag)
     ok = vet_images(line["text"], cands)
     keep = [cands[i] for i in ok][:n]
     log(f"   사진 후보 {len(cands)} → 통과 {len(ok)} → 사용 {len(keep)}")
@@ -315,13 +333,22 @@ def make_video(scenes, date_label):
     line_clips, stats = [], {"photo": 0, "emoji": 0}
     for si, scene in enumerate(scenes):
         log(f"== [{si + 1}/{len(scenes)}] {scene['title'].replace(chr(10), ' ')}")
+        # 1) 문장마다 음성과 사진 먼저 준비
+        prep = []
         for li, line in enumerate(scene["lines"]):
             tag = f"{si}_{li}"
             voice = f"{WORK}/v_{tag}.mp3"
             asyncio.run(RP.tts(line["text"], VOICE, RATE, voice))
             dur = RP.duration(voice) + RP.GAP
             n = max(1, round(dur / 3.0))
-            photos = pick_images(line, tag, n)
+            photos = pick_images(line, tag, n, scene["tag"]) if line.get("image_queries") is not None else []
+            prep.append((li, line, tag, voice, dur, n, photos))
+        # 2) 사진이 없는 문장은 같은 뉴스의 다른 문장 사진을 나눠 씀 (이모지는 최후 수단)
+        pool = [p for x in prep for p in x[6]]
+        for li, line, tag, voice, dur, n, photos in prep:
+            if not photos and pool:
+                photos = [pool[(li + j) % len(pool)] for j in range(min(n, len(pool)))]
+                log(f"   [{tag}] 같은 뉴스의 사진 재사용 {len(photos)}장")
             segs = []
             for k in range(n):
                 seg = f"{WORK}/seg_{tag}_{k}.mp4"
@@ -567,7 +594,8 @@ def main():
     hh, mm = map(int, a.at.split(":"))
     post_at = start.replace(hour=hh, minute=mm, second=0, microsecond=0)
     # 게시 40분 전까지는 영상이 완성되도록: 사진 검수는 (게시 70분 전) 또는 (시작 후 60분) 중 빠른 때까지만
-    VET_DEADLINE = min(start + dt.timedelta(minutes=60), post_at - dt.timedelta(minutes=70)) \
+    # GitHub 예약 실행은 40~50분 늦게 시작하기도 해서, 시작 시각이 아니라 게시 시각 기준으로 넉넉히
+    VET_DEADLINE = post_at - dt.timedelta(minutes=30) \
         if (not a.dry_run and not a.now and post_at > start) else start + dt.timedelta(minutes=60)
 
     if not a.dry_run and not a.prepare_only and already_posted_today():
@@ -600,7 +628,7 @@ def main():
         log("점검 실패 → 이모지 장면으로 다시 제작")
         for sc in scenes:
             for l in sc["lines"]:
-                l["image_queries"] = []
+                l["image_queries"] = None  # None = 사진 없이
         video = make_video(scenes, date_label)
         problems = qa_video(video)
         if problems:

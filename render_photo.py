@@ -17,7 +17,8 @@ HDR = {"User-Agent": "morning-news-video-test/0.2"}
 # 뉴스에 엉뚱한 의미를 줄 수 있는 사진(인물 초상, 정당 깃발, 지도 등)은 제외
 BAN = ("portrait", "초상", "person", "people", "man ", "woman", "president", "minister", "chief justice",
        "party", "당 ", "노동당", "flag", "coin", "map", "지도", "bridge", "breathalyzer test", "logo",
-       "cj ", "headquarters in south korea", "red army", "assange", "sc.png", "dprk", "iaea", "haeundae", "homeplus digital", "runners", "taft", "long live")
+       "cj ", "headquarters in south korea", "red army", "assange", "sc.png", "dprk", "iaea", "haeundae", "homeplus digital", "runners", "taft", "long live",
+       ".pdf", ".tif", ".djvu", "letter", "document", "kim il", "kim jong", "pyongyang", "north korea")
 OK_LIC = ("cc0", "public domain", "pdm", "cc by", "cc-by")
 CACHE = "cache"
 os.makedirs(OUT, exist_ok=True)
