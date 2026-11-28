@@ -232,13 +232,17 @@ def fallback(path):
 
 
 async def tts(text, voice, rate, path):
-    for attempt in range(5):  # 무료 음성 서비스가 가끔 응답을 안 줄 때 재시도
+    # 무료 음성 서비스가 가끔 응답을 안 줄 때: 같은 목소리로 넉넉히 재시도 → 그래도 안 되면 다른 한국어 목소리
+    plan = [voice] * 8 + ["ko-KR-InJoonNeural"] * 4 + [voice] * 4
+    for attempt, v in enumerate(plan):
         try:
-            await edge_tts.Communicate(text, voice, rate=rate).save(path)
-            return
+            await edge_tts.Communicate(text, v, rate=rate).save(path)
+            if os.path.getsize(path) > 1000:
+                return
+            raise RuntimeError("빈 음성")
         except Exception as e:
-            print("   음성 재시도:", type(e).__name__)
-            await asyncio.sleep(3 * (attempt + 1))
+            print(f"   음성 재시도({v}, {attempt + 1}):", type(e).__name__, flush=True)
+            await asyncio.sleep(min(5 * (attempt + 1), 30))
     raise RuntimeError("음성 생성 실패")
 
 

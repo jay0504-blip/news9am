@@ -338,7 +338,11 @@ def make_video(scenes, date_label):
         for li, line in enumerate(scene["lines"]):
             tag = f"{si}_{li}"
             voice = f"{WORK}/v_{tag}.mp3"
-            asyncio.run(RP.tts(line["text"], VOICE, RATE, voice))
+            try:
+                asyncio.run(RP.tts(line["text"], VOICE, RATE, voice))
+            except Exception as e:  # 음성이 끝내 안 만들어지면 이 문장만 빼고 계속
+                log(f"   [{tag}] 음성 실패 → 이 문장 생략:", str(e)[:60])
+                continue
             dur = RP.duration(voice) + RP.GAP
             n = max(1, round(dur / 3.0))
             photos = pick_images(line, tag, n, scene["tag"]) if line.get("image_queries") is not None else []
