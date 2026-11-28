@@ -4,64 +4,31 @@
       "source_ids": [
         0
       ],
-      "tag": "경제",
-      "title": "동해에 아시아 최대\nAI 데이터센터 착공",
+      "tag": "IT",
+      "title": "동해에 짓는\n최대 데이터센터",
       "lines": [
         {
-          "text": "GS가 강원 동해시에 15조 원을 투입해 아시아 최대 규모의 AI 산업기지 조성에 본격 착수했대요.",
+          "text": "GS그룹이 강원도 동해시에 아시아 최대 규모의 AI 데이터센터를 짓기 위해 첫 삽을 떴대요.",
           "image_queries": [
-            "data center server room",
-            "cloud computing facility"
+            "data center building",
+            "server room computing"
           ],
           "emojis": [
             "💻",
             "🏢",
-            "⚡"
+            "🚀"
           ]
         },
         {
-          "text": "이번 대규모 데이터센터 건립으로 동해가 미래 AI 산업의 새로운 핵심 거점으로 거듭날지 주목받고 있어요.",
+          "text": "정부도 우리나라가 AI 선도 국가로 자리 잡을 수 있도록 모든 역량을 쏟아붓겠다고 밝혔어요.",
           "image_queries": [
-            "telecommunication tower",
-            "industrial park aerial view"
+            "government building architecture",
+            "artificial intelligence technology"
           ],
           "emojis": [
-            "🌐",
-            "🚀",
-            "💡"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        6
-      ],
-      "tag": "생활",
-      "title": "한국보다 싸다며?\n대마도 마운자로 원정",
-      "lines": [
-        {
-          "text": "비만 치료제 마운자로를 사기 위해 일본 대마도로 향하는 한국인 원정 구매객이 급증해 배편이 매진되었대요.",
-          "image_queries": [
-            "passenger ferry sea",
-            "pharmacy shelf medicine"
-          ],
-          "emojis": [
-            "⛴️",
-            "💊",
-            "🏃"
-          ]
-        },
-        {
-          "text": "한국보다 가격이 저렴하다는 이유로 몰리고 있지만, 현지에서는 부작용 우려에 대한 경고도 나오고 있어요.",
-          "image_queries": [
-            "medical prescription bottle",
-            "hospital pharmacy interior"
-          ],
-          "emojis": [
-            "⚠️",
-            "📉",
-            "🏥"
+            "🏛️",
+            "✨",
+            "🇰🇷"
           ]
         }
       ]
@@ -70,97 +37,97 @@
       "source_ids": [
         7
       ],
-      "tag": "법원",
-      "title": "관저 이전 예산 전용\n김대기 집유·이상민 무죄",
+      "tag": "생활",
+      "title": "대마도로 떠나는\n'비만약 원정대'",
       "lines": [
         {
-          "text": "대통령 관저 이전 과정에서 예산을 전용한 혐의를 받는 김대기 전 대통령비서실장이 1심에서 징역형 집행유예를 선고받았어요.",
+          "text": "비만 치료제 '마운자로'를 한국보다 훨씬 싸게 사기 위해 일본 대마도로 떠나는 원정대가 늘고 있대요.",
           "image_queries": [
-            "korea court building",
-            "courtroom gavel justice"
+            "pharmacy medicine bottle",
+            "passenger ferry ocean"
           ],
           "emojis": [
-            "⚖️",
-            "🏛️",
-            "📄"
+            "💊",
+            "🛳️",
+            "📦"
           ]
         },
         {
-          "text": "함께 재판에 넘겨진 이상민 전 행정안전부 장관은 당시 최종 결재권자가 아니었다는 이유로 1심 무죄를 선고받았대요.",
+          "text": "배편이 동날 정도로 인기를 끌고 있지만, 일본 현지에서는 부작용 우려와 경계의 목소리도 나온대요.",
           "image_queries": [
-            "courthouse entrance",
-            "law book justice scale"
+            "tsushima island harbour",
+            "warning sign medicine"
           ],
           "emojis": [
-            "📜",
-            "🧑‍⚖️",
-            "🔍"
+            "⚠️",
+            "🌊",
+            "🇯🇵"
           ]
         }
       ]
     },
     {
       "source_ids": [
-        15
+        14
+      ],
+      "tag": "경제",
+      "title": "증시 안정펀드\n최대 40조 가동",
+      "lines": [
+        {
+          "text": "주가 하락 방지를 위해 정부와 금융당국이 증권시장 안정펀드 가동 준비에 나섰대요.",
+          "image_queries": [
+            "stock exchange display",
+            "financial district skyline"
+          ],
+          "emojis": [
+            "📉",
+            "💵",
+            "🏛️"
+          ]
+        },
+        {
+          "text": "씨티은행은 이 증시 안정펀드 규모가 최대 40조 원까지 확대될 수 있다고 전망했어요.",
+          "image_queries": [
+            "bank building facade",
+            "currency money stack"
+          ],
+          "emojis": [
+            "🏦",
+            "📈",
+            "💰"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        16
       ],
       "tag": "IT",
-      "title": "중국 데이터센터서\n엔비디아 최신 칩 발견",
+      "title": "중국 시설에서\n엔비디아 칩 발견",
       "lines": [
         {
-          "text": "미국의 첨단 반도체 수출 규제 품목인 엔비디아의 최신 AI 칩 블랙웰이 중국 내 데이터센터 시설에서 발견됐대요.",
+          "text": "미국이 수출을 금지한 엔비디아의 최첨단 AI 칩 '블랙웰'이 중국 데이터센터에 설치된 정황이 포착됐대요.",
           "image_queries": [
-            "computer microchip hardware",
-            "silicon semiconductor wafer"
+            "microchip circuit board",
+            "artificial intelligence server"
           ],
           "emojis": [
-            "🤖",
-            "🔬",
-            "🖥️"
+            "🔍",
+            "🖥️",
+            "⚠️"
           ]
         },
         {
-          "text": "미국의 고강도 무역 제재망을 어떻게 뚫고 최첨단 반도체가 현지에 설치되었는지를 두고 큰 파장이 일고 있어요.",
+          "text": "젠슨 황 CEO의 인물 스캔들과 연계된 시설에서 발견되어 논란이 일고 있대요.",
           "image_queries": [
-            "cargo container port terminal",
-            "server racks green led"
+            "technology network structure",
+            "data center server rack"
           ],
           "emojis": [
-            "📦",
-            "🚨",
-            "🌐"
-          ]
-        }
-      ]
-    },
-    {
-      "source_ids": [
-        12
-      ],
-      "tag": "국제",
-      "title": "라이칭더 중간평가\n대만 지방선거 투표",
-      "lines": [
-        {
-          "text": "대만 총통에 대한 중간평가 성격을 띤 지방선거 본투표가 시작되며 수도 타이베이 등 격전지가 주목받고 있어요.",
-          "image_queries": [
-            "Taipei city skyline",
-            "election ballot box vote"
-          ],
-          "emojis": [
-            "🗳️",
-            "🇹🇼",
-            "🏙️"
-          ]
-        },
-        {
-          "text": "선거를 앞두고 중국군의 무력 시위가 이어진 가운데 반중 성향 후보와 장제스 증손자 후보 간의 맞대결이 치열하대요.",
-          "image_queries": [
-            "military jet fighter aircraft",
-            "city street voting campaign"
-          ],
-          "emojis": [
-            "⚔️",
-            "📢",
-            "👀"
+            "🌐",
+            "⚡",
+            "🚨"
           ]
         }
       ]
@@ -169,35 +136,68 @@
       "source_ids": [
         17
       ],
-      "tag": "사회",
-      "title": "금요일 밤 10시에\n직원 400명 호출 논란",
+      "tag": "경제",
+      "title": "포스코 노사\n5개월 만에 타결",
       "lines": [
         {
-          "text": "이해욱 DL그룹 회장이 실적이 부진한 부서 직원 400여 명을 금요일 밤 10시에 본사로 긴급 소집해 논란이 번지고 있어요.",
+          "text": "포스코 노사가 5개월간의 진통 끝에 기본급 2.6% 인상 등이 담긴 임금 협안에 최종 합의했대요.",
           "image_queries": [
-            "office building night lights",
-            "empty office conference room"
+            "steel factory heavy industry",
+            "steel manufacture mill"
           ],
           "emojis": [
-            "🏢",
-            "🌙",
-            "📱"
+            "🏭",
+            "🤝",
+            "⚙️"
           ]
         },
         {
-          "text": "주말을 앞둔 늦은 밤에 이뤄진 갑작스러운 호출 통보에 직장인들을 중심으로 부적절한 갑질이라는 비판이 쏟아졌대요.",
+          "text": "조합원 투표에서 65%의 찬성을 얻어 창사 첫 파업 위기를 넘기고 경영 정상화에 나섭니다.",
           "image_queries": [
-            "clock midnight time",
-            "commuter bus stop night"
+            "industrial plant silhouette",
+            "corporate office building"
           ],
           "emojis": [
-            "⏰",
-            "💢",
-            "🗣️"
+            "✅",
+            "🏢",
+            "🔥"
+          ]
+        }
+      ]
+    },
+    {
+      "source_ids": [
+        13
+      ],
+      "tag": "국제",
+      "title": "아프리카 최초\n에볼라 백신 임상",
+      "lines": [
+        {
+          "text": "아프리카 우간다에서 차세대 mRNA 방식의 에볼라 백신 임상시험이 아프리카 최초로 시작됐대요.",
+          "image_queries": [
+            "laboratory vaccine research",
+            "medical syringe clinic"
+          ],
+          "emojis": [
+            "🧪",
+            "💉",
+            "🌍"
+          ]
+        },
+        {
+          "text": "최근 콩고민주공화국 등에서 에볼라 사망자가 급증하는 가운데 백신 개발에 기대가 모이고 있어요.",
+          "image_queries": [
+            "hospital medical equipment",
+            "africa continent map"
+          ],
+          "emojis": [
+            "🏥",
+            "🛡️",
+            "🔬"
           ]
         }
       ]
     }
   ],
-  "weather": "기온이 전날보다 7도 안팎 뚝 떨어져 춥겠고 곳곳에 비나 눈이 내리며, 제주와 전라권에는 최대 5cm의 눈이 쌓일 수 있으니 옷차림 따뜻하게 하세요."
+  "weather": "주말 사이 기온이 7도 이상 뚝 떨어지고 제주와 전라 지역에는 눈이나 비가 올 예정이에요."
 }
